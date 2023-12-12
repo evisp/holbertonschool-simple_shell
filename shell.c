@@ -1,6 +1,5 @@
 #include "shell.h"
 
-/* global variable name */
 char *name;
 
 int main(int __attribute__ ((unused))argc, char *argv[])
@@ -13,15 +12,11 @@ int main(int __attribute__ ((unused))argc, char *argv[])
 
     while (1)
     {
-        /* check if an open file descriptor is associated with the terminal device */
         if (isatty(STDIN_FILENO) == 1)
-            /* write to standard output */
             write(1, "$ ", 2);
 
-        /* store the number of characters read */
         characters = getline(&line, &buf_size, stdin);
 
-        /* in case of failure or reaching EOF, write a new line if the file is open */
         if (characters == -1)
         {
             if (isatty(STDIN_FILENO) == 1)
@@ -29,19 +24,16 @@ int main(int __attribute__ ((unused))argc, char *argv[])
             break;
         }
 
-        /* when encountering a newline, write a null terminating byte */
         if (line[characters - 1] == '\n')
             line[characters - 1] = '\0';
 
         if (*line == '\0')
             continue;
 
-        /* in case of exit */
         if (command_read(line) == 2)
             break;
     }
 
-    /* free resources */
     free(line);
     line = NULL;
 
@@ -60,28 +52,27 @@ int command_read(char *s)
         return _printenv();
 
     token = strtok(s, " "), i = 0;
-    while (token && i < 99) // Ensure the array doesn't overflow
+    while (token && i < 99) 
     {
         cmd_arr[i++] = token;
         token = strtok(NULL, " ");
     }
     cmd_arr[i] = NULL;
 
-    /* Return status code */
     return execute(cmd_arr);
 }
 
 int execute(char *cmd_arr[])
 {
+    pid_t pid;
+    int status;
     char *exe_path = command_path(cmd_arr[0]);
+
     if (exe_path == NULL)
     {
         fprintf(stderr, "%s: %s: not found\n", name, cmd_arr[0]);
         return 3;
     }
-
-    pid_t pid;
-    int status;
 
     pid = fork();
     if (pid < 0)

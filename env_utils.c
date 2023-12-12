@@ -22,12 +22,14 @@ int _printenv()
 
 char *_getenv(char *name)
 {
+    int len_name;
+    
 	if (environ == NULL) {
 		fprintf(stderr, "Environment variable is NULL.\n");
 		return NULL;
 	}
 
-	int len_name = strlen(name);
+	len_name = strlen(name);
 
 	for (int i = 0; environ[i] != NULL; i++)
 	{

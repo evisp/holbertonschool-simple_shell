@@ -2,11 +2,11 @@
 
 int main(void)
 {
-	/* Test _printenv */
+    char *cmd, *path; 
+
 	printf("Printing environment variables:\n");
 	_printenv();
 
-	/* Test _getenv */
 	char *path_var = _getenv("PATH");
 	if (path_var != NULL)
 		//printf("\nValue of PATH: %s\n", path_var);
@@ -14,9 +14,8 @@ int main(void)
 	else
 		printf("\nPATH not found in environment.\n");
 
-    /* Test command_path */
-    char *cmd = "pwd";
-    char *path = command_path(cmd);
+    cmd = "pwd";
+    path = command_path(cmd);
 
     if (path != NULL)
     {
