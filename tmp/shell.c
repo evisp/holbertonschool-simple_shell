@@ -54,16 +54,8 @@ int command_read(char *s)
     token = strtok(s, " "), i = 0;
     while (token && i < 99) 
     {
-        if (token[0] == '"')
-        {
-            cmd_arr[i++] = token + 1; 
-            token = strtok(NULL, "\""); 
-        }
-        else
-        {
-            cmd_arr[i++] = token;
-            token = strtok(NULL, " ");
-        }
+        cmd_arr[i++] = token;
+        token = strtok(NULL, " ");
     }
     cmd_arr[i] = NULL;
 
