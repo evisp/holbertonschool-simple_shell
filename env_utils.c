@@ -22,8 +22,8 @@ int _printenv()
 
 char *_getenv(char *name)
 {
-    int len_name;
-    
+    int i, len_name;
+
 	if (environ == NULL) {
 		fprintf(stderr, "Environment variable is NULL.\n");
 		return NULL;
@@ -31,7 +31,7 @@ char *_getenv(char *name)
 
 	len_name = strlen(name);
 
-	for (int i = 0; environ[i] != NULL; i++)
+	for (i = 0; environ[i] != NULL; i++)
 	{
 		if (strncmp(environ[i], name, len_name) == 0)
 			return &environ[i][len_name];
