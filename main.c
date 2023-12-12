@@ -9,9 +9,8 @@ int main(void)
 
 	char *path_var = _getenv("PATH");
 	if (path_var != NULL)
-		//printf("\nValue of PATH: %s\n", path_var);
-        printf("Path found\n");
-	else
+		printf("\nValue of PATH: %s\n", path_var);
+    else
 		printf("\nPATH not found in environment.\n");
 
     cmd = "pwd";

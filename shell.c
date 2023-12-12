@@ -42,9 +42,9 @@ int main(int __attribute__ ((unused))argc, char *argv[])
 
 int command_read(char *s)
 {
+    int i;
     char *token = NULL;
     char *cmd_arr[100];
-    int i;
 
     if (strcmp(s, "exit") == 0)
         return 2;
@@ -65,8 +65,10 @@ int command_read(char *s)
 int execute(char *cmd_arr[])
 {
     pid_t pid;
-    int status;
-    char *exe_path = command_path(cmd_arr[0]);
+    int   status;
+    char *exe_path;
+    
+    exe_path = command_path(cmd_arr[0]);
 
     if (exe_path == NULL)
     {

@@ -2,9 +2,10 @@
 
 char *command_path(char *cmd)
 {
-    char *token, *path_copy, *full_path;
+    char *token, *path_copy, *path, *full_path;
     struct stat buf;
-    char *path = _getenv("PATH");
+    
+    path = _getenv("PATH");
 
     if (path == NULL)
     {
