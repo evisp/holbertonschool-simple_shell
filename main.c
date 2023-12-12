@@ -2,12 +2,12 @@
 
 int main(void)
 {
-    char *cmd, *path; 
+    char *cmd, *path, *path_var; 
 
 	printf("Printing environment variables:\n");
 	_printenv();
 
-	char *path_var = _getenv("PATH");
+	path_var = _getenv("PATH");
 	if (path_var != NULL)
 		printf("\nValue of PATH: %s\n", path_var);
     else
